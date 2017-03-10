@@ -3,8 +3,7 @@ var estudiantes = [];
 function obtenerListaEstudiantes() {
     // TO DO: Retornar la lista de estudiantes
    // mostrar(estudiantes);
-   var estudiantes=mostrar();
-   mostrarLista(estudiantes);
+   return estudiantes;
 
 
     
@@ -18,19 +17,21 @@ function agregarEstudiante() {
     // TO DO: Retornar el estudiante recientemente creado
 
 
-
+    //Declaracion de variables 
     var nombre=prompt("Nombre de la estudiante");
     var porcentaje=prompt("Porcentaje Técnico");
     var hse= prompt("Porcentaje Habilidades Socio-Emocionales");
+    //Creando un objeto estudiante con propiedades nombre, porcentaje y hse.
      estudiante = {
         nombre:nombre,
         porcentaje:porcentaje,
         hse:hse
     };
+    //agregamos a nuestro arreglo estudiantes el objeto 
     estudiantes.push(estudiante);
     console.log(estudiantes);
     console.log(estudiante);
-    mostrarLista(estudiantes);
+    //mostrarLista(estudiantes);
 
     return estudiante;
    
@@ -56,38 +57,44 @@ function mostrar(estudiante) {
 function mostrarLista(estudiantes) {
     // TO DO: Iterar la lista del estudiantes para devolverlos en el formato que usa la función mostrar(estudiante)
     // Retornar el template de todos los estudiantes
-    var limite=estudiantes.length;
-    for (var i=0; i<limite; i++){
-        var estudiante=estudiantes[i];
-        return  estudiante;
-    }
-    
-}
-
+   // var res="";
+    //for (var i=0; i<estudiantes.length;i++){
+     //   res += mostrar(estudiantes[i]);
+    //}
+   // return res;
+  //}      
+    var res="";
+    estudiantes.forEach(function(estudiante){
+    res += mostrar(estudiante);
+    });
+    return res;
+  }      
 function buscar(nombre, estudiantes) {
     // TO DO: Buscar el nombre en la lista de estudiantes que se recibe por parámetros
     // Retornar el objeto del estudiante buscado
     // Nota: NO IMPORTA SI EL USUARIO ESCRIBE EL NOMBRE EN MAYÚSCULAS O MINÚSCULAS
-    var limite= estudiantes.length;
-    for (i =0; i<limite;  i++){
-        if (nombre.toLowerCase == estudiantes [i]){
-            return estudiante;
-        }
-    }
+    var buscarAlumna=estudiantes.filter(function(estudiante){
+    return estudiante.nombre.toLowerCase() == nombre.toLowerCase();
+    });
+    return buscarAlumna;
+
+        
+    
     
 }
 
 function topTecnico(estudiantes) {
     // TO DO: Retornar el arreglo de estudiantes ordenado por puntaje técnico de mayor a menor
-    return estudiantes.sort(function(a,b){
-    return a.porcentaje>b.porcentaje
+    var puntosTecnicos= estudiantes.sort(function(a,b){
+    return b.porcentaje - a.porcentaje
     });
-    
+   return puntosTecnicos; 
 }
 
 function topHSE(estudiantes) {
     // TO DO: Retornar el arreglo de estudiantes ordenado por puntaje de HSE de mayor a menor
-    return estudiantes.sort(function(a,b){
-    return a. hse> b.hse;
+    var puntosHse = estudiantes.sort(function(a,b){
+    return b. hse - a.hse;
     });
+    return  puntosHse;
 }
